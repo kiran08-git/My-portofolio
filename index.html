@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sai Kiran P — Portfolio</title>
+
+<!-- ============================================================
+  HOW TO CUSTOMIZE THIS SITE (read me first!)
+  1. Photo: search "PHOTO" in the .photo-frame below and change
+     src="your-photo.jpg" to the filename/path of your own photo.
+     Place that image file in the same folder as this HTML file.
+  2. Resume: search "RESUME LINK" and point the href at your actual
+     resume file (e.g. Sai_Kiran_P_Resume.docx / .pdf), placed in the
+     same folder as this HTML file.
+  3. Projects: search "PROJECT CARD" — duplicate the block for each
+     project you want to add.
+  4. Certificates: search "CERTIFICATE CARD" — same pattern.
+  5. Contact: search "your.email@example.com" (in this file and in
+     script.js) and replace with your real email address. Also
+     update the GitHub / LinkedIn links.
+
+  FILES:
+  - index.html  -> structure / content (this file)
+  - style.css   -> all visual styling
+  - script.js   -> typing effect, expand/collapse, photo upload, form
+============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- All visual styling lives in style.css, kept separate from content -->
+<link rel="stylesheet" href="style.css">
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+
+<script src="script2.fixed.js"></script>
+</head>
+<body>
+
+<!-- ============================================================
+  NAVIGATION BAR
+  Sticky top bar with a terminal-prompt style logo and jump links
+  to each section. Because #projects and #certificates are hidden
+  by default, clicking these links will scroll to them but the
+  visitor still needs to press the "explore" buttons to open them.
+============================================================ -->
+<header>
+  <nav class="wrap">
+    <div class="logo">Sai Kiran</div>
+    <ul class="navlinks">
+      <li><a href="#about">about</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#certificates">certificates</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <!-- ============================================================
+    SECTION 1: ABOUT (always visible on page load)
+    Two-column layout:
+      - Left: a "terminal window" card with your name, role, a
+        typing-effect line (handled in script.js), a short bio,
+        and the three main action buttons (resume / projects /
+        certificates).
+      - Right: a photo card with a circular frame and an upload
+        control so you can preview a profile photo.
+    This is the ONLY content visible when someone first lands on
+    the page, per your requirement.
+  ============================================================ -->
+  <section id="about">
+    <div class="hero-grid">
+
+      <div class="term">
+        <div class="term-bar">
+          <span class="term-dot red"></span>
+          <span class="term-dot yellow"></span>
+          <span class="term-dot green"></span>
+          <span class="term-path">About</span>
+        </div>
+        <div class="term-body">
+          <div class="eyebrow">// about</div>
+          <h1>Sai Kiran P</h1>
+          <div class="role">Computer Science Engineering Student</div>
+
+          <!-- Typing effect target: script.js types text into this span -->
+          <div class="typing-line"><span id="typeTarget"></span><span class="cursor"></span></div>
+
+          <p class="bio">
+            Motivated and detail-oriented B.E. Computer Science and Engineering student with hands-on experience in front-end development, UI/UX design, and data analysis. Skilled in building responsive, user-friendly web applications using modern web technologies. Strong problem-solving, analytical, and creative design skills, with a passion for developing intuitive digital experiences and continuously learning new technologies.
+          </p>
+
+          <div class="cmd-buttons">
+            <!-- RESUME LINK: point this href at your actual resume file -->
+            <a class="btn primary" href="Sai_Kiran_P_Resume.pdf" target="_blank" rel="noopener">
+              view-resume
+            </a>
+
+            <!-- These two buttons toggle the hidden sections below via script.js -->
+            <button class="btn" id="projectsToggle" aria-expanded="false" aria-controls="projects">
+              Projects
+            </button>
+            <button class="btn" id="certsToggle" aria-expanded="false" aria-controls="certificates">
+              Certificates
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="term photo-card">
+        <div class="photo-frame">
+          <!-- PHOTO: replace "your-photo.jpg" below with the path/filename of your own photo -->
+          <img src="WhatsApp Image 2026-07-06 at 10.16.55 AM.jpeg" alt="Sai Kiran P">
+        </div>
+        <div class="photo-caption">
+Sai Kiran | CSE Student</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+    SECTION 2: PROJECTS (hidden until "cd projects/ && ls" is clicked)
+    Wrapped in .reveal-section, which is collapsed (max-height: 0)
+    by default in style.css. script.js toggles the "open" class on
+    this div when the projects button is pressed, which is what
+    actually reveals it — it is NOT part of the first-page view.
+  ============================================================ -->
+  <div class="reveal-section" id="projects">
+    <section class="block">
+      <div class="term">
+        <div class="term-bar">
+          <span class="term-dot red"></span>
+          <span class="term-dot yellow"></span>
+          <span class="term-dot green"></span>
+          <span class="term-path">projects</span>
+        </div>
+        <div class="term-body">
+          <div class="section-heading-row">
+            <h2>// academic &amp; personal projects</h2>
+          </div>
+
+          <div class="grid-cards">
+
+            <!-- PROJECT CARD: duplicate this block for each project -->
+            <div class="card">
+              <h3>Quiz App</h3>
+              <p>
+                A group project to build a quiz app with front end and back end for college quiz competition.
+                contains MCQ and compilers.
+              </p>
+              <div class="tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Node JS</span>
+              </div>
+              <a class="card-link" href="https://github.com/kiran08-git/flappy-bird" target="_blank" rel="noopener">view-source →</a>
+            </div>
+
+            <!-- Empty "add project" placeholder tiles -->
+            <div class="card">
+              <h3>Flappy Bird — Canvas Game</h3>
+              <p>
+                A canvas-based recreation of Flappy Bird with custom
+                physics, collision detection, and game-state management,
+                structured into clean, well-commented HTML, CSS, and
+                JavaScript files.
+              </p>
+              <div class="tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Canvas API</span>
+              </div>
+              <a class="card-link" href="https://github.com/kiran08-git/flappy-bird" target="_blank" rel="noopener">view-source →</a>
+            </div>
+
+            <div class="card placeholder">
+              <div class="plus"></div>
+              <p>uploading soon</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+    SECTION 3: CERTIFICATES (hidden until "cd certificates/ && ls")
+    Same hide/reveal pattern as the projects section above, just
+    with its own toggle button and its own "open" class target.
+  ============================================================ -->
+  <div class="reveal-section" id="certificates">
+    <section class="block">
+      <div class="term">
+        <div class="term-bar">
+          <span class="term-dot red"></span>
+          <span class="term-dot yellow"></span>
+          <span class="term-dot green"></span>
+          <span class="term-path">certificates</span>
+        </div>
+        <div class="term-body">
+          <div class="section-heading-row">
+            <h2>// certifications</h2>
+          </div>
+
+          <div class="grid-cards">
+
+            <!-- CERTIFICATE CARD: example — replace with your real certificate -->
+            <div class="card cert-card">
+              <div class="cert-icon">N</div>
+              <div>
+                <h3>MasterClass in UI/UX Design</h3>
+                <div class="cert-meta">Novitech · july 12 2025</div>
+              </div>
+              <a class="card-link" href="SAI KIRAN P.pdf" target="_blank" rel="noopener">view-source →</a>
+            </div>
+
+            <div class="card cert-card">
+              <div class="cert-icon">C</div>
+              <div>
+                <h3>basics of c and python</h3>
+                <div class="cert-meta">technoz · april 17 2023</div>
+              </div>
+              <a class="card-link" href="#">view-source →</a>
+            </div>
+
+            <div class="card placeholder">
+              <div class="plus"></div>
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+    SECTION 4: CONTACT (always visible, last section on the page)
+    Left: a form (name / email / message) that, on submit, builds
+    a mailto: link in script.js and opens the visitor's email app
+    with the message pre-filled — no backend/server required.
+    Right: a direct "mailto" button plus GitHub/LinkedIn placeholders.
+  ============================================================ -->
+  <section id="contact">
+    <div class="term">
+      <div class="term-bar">
+        <span class="term-dot red"></span>
+        <span class="term-dot yellow"></span>
+        <span class="term-dot green"></span>
+        <span class="term-path">Contact</span>
+      </div>
+      <div class="term-body">
+        <div class="section-heading-row">
+          <h2>// get in touch</h2>
+        </div>
+
+        <div class="contact-grid" style="margin-top:18px;">
+          <form id="contactForm">
+            <div class="field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="from_name" required>
+            </div>
+            <div class="field">
+              <label for="cf-email">Your email</label>
+              <input type="email" id="cf-email" name="from_email" required>
+            </div>
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn primary">
+              send-email
+            </button>
+            <p id="formStatus" aria-live="polite"></p>
+          </form>
+
+          <div class="direct-contact">
+            <p>
+              Prefer to reach out directly? Email me and I'll get back
+              to you as soon as I can.
+            </p>
+            <!-- Replace your.email@example.com with your real email address -->
+            <a class="btn" href="mailto:your.emailgmail.com">
+              mail to: saikiranp115@gmail.com
+            </a>
+            <div class="social-row">
+              <a class="social-pill" href="https://github.com/kiran08-git" target="_blank" rel="noopener">github →</a>
+              <a class="social-pill" href="https://www.linkedin.com/in/saikiran-p-a69775378/" target="_blank" rel="noopener">linkedin →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  built by Sai Kiran P — © <span id="year"></span>
+</footer>
+
+<!-- All interactivity (typing effect, section toggles, photo upload, contact form) lives in script.js -->
+<script src="script.js"></script>
+</body>
+</html>

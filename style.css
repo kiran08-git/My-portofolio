@@ -1,0 +1,446 @@
+/* ================================================================
+   DESIGN TOKENS
+   All colors, fonts, and shared measurements live here as CSS
+   variables. Change a value once here and it updates everywhere
+   it's used — this is the easiest place to re-theme the whole site.
+================================================================ */
+:root{
+  --bg: #0a1120;           /* page background (deep navy) */
+  --surface: #101a30;      /* terminal window background */
+  --surface-2: #16213d;    /* title bars, buttons, cards */
+  --border: #253253;       /* hairline borders everywhere */
+  --amber: #e3a53d;        /* primary accent (terminal amber) */
+  --amber-soft: rgba(227,165,61,0.14);
+  --teal: #5fd4c4;         /* secondary accent (links, tags) */
+  --text: #e8ecf3;         /* main text color */
+  --muted: #8291ab;        /* secondary/muted text */
+  --dot-red: #ff5f56;      /* terminal traffic-light dots */
+  --dot-yellow: #ffbd2e;
+  --dot-green: #27c93f;
+
+  --font-display: 'JetBrains Mono', monospace; /* headings & UI labels */
+  --font-body: 'Inter', sans-serif;            /* paragraph text */
+
+  --radius: 10px;
+  --max-width: 1100px;
+}
+
+/* Respect visitors who have "reduce motion" turned on in their OS */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* ================================================================
+   BASE / RESET
+   Global element defaults so the rest of the file only needs to
+   describe differences, not repeat basics.
+================================================================ */
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; } /* smooth-scrolls to nav-link anchors */
+
+body{
+  margin:0;
+  background: var(--bg);
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(227,165,61,0.06), transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(95,212,196,0.06), transparent 40%);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+a{ color: inherit; }
+
+/* Visible keyboard focus ring for accessibility */
+:focus-visible{
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+.wrap{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ================================================================
+   NAVIGATION BAR
+   Sticky header with the logo on the left and section links on
+   the right. Stays pinned to the top while scrolling.
+================================================================ */
+header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10,17,32,0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+nav.wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.logo{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.logo span{ color: var(--amber); }
+.navlinks{
+  display:flex;
+  gap: 22px;
+  list-style:none;
+  margin:0; padding:0;
+  font-family: var(--font-display);
+  font-size: 13px;
+}
+.navlinks a{
+  text-decoration:none;
+  color: var(--muted);
+  transition: color .2s ease;
+}
+.navlinks a:hover{ color: var(--teal); }
+.navlinks a::before{ content:"/"; color: var(--border); margin-right:3px; }
+
+/* ================================================================
+   TERMINAL WINDOW CHROME (the site's signature visual element)
+   Every section is wrapped in a ".term" card styled like a
+   terminal/code-editor window, with three colored dots and a
+   fake file path in the title bar (e.g. ~/projects).
+================================================================ */
+.term{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.term-bar{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.term-dot{ width:11px; height:11px; border-radius:50%; }
+.term-dot.red{ background: var(--dot-red); }
+.term-dot.yellow{ background: var(--dot-yellow); }
+.term-dot.green{ background: var(--dot-green); }
+.term-path{
+  margin-left: 8px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--muted);
+}
+.term-body{ padding: 22px; }
+
+/* ================================================================
+   SECTION 1: ABOUT / HERO
+   Two-column grid: the intro terminal card on the left, the photo
+   card on the right. This is the only content shown by default.
+================================================================ */
+#about{ padding: 56px 0 40px; }
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 28px;
+  align-items: stretch;
+}
+.eyebrow{
+  font-family: var(--font-display);
+  color: var(--amber);
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+h1{
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  margin: 10px 0 6px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.role{
+  color: var(--teal);
+  font-family: var(--font-display);
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+/* The animated "typed" line under the role — text is inserted by script.js */
+.typing-line{
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--muted);
+  min-height: 22px;
+  margin-bottom: 4px;
+}
+.cursor{
+  display:inline-block;
+  width: 8px; height: 15px;
+  background: var(--teal);
+  margin-left: 2px;
+  animation: blink 1s steps(1) infinite;
+  vertical-align: -2px;
+}
+@keyframes blink{ 50%{ opacity:0; } }
+
+.bio{
+  margin: 18px 0 26px;
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 52ch;
+}
+
+/* Row of "command-style" action buttons: resume / projects / certificates */
+.cmd-buttons{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.btn{
+  font-family: var(--font-display);
+  font-size: 13px;
+  border-radius: 6px;
+  padding: 11px 16px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  transition: border-color .2s ease, transform .15s ease, background .2s ease;
+}
+.btn:hover{ border-color: var(--amber); transform: translateY(-1px); }
+.btn .prompt{ color: var(--teal); }
+.btn.primary{
+  background: var(--amber-soft);
+  border-color: var(--amber);
+}
+.btn.primary:hover{ background: rgba(227,165,61,0.22); }
+/* Highlights a toggle button while its section is open */
+.btn[aria-expanded="true"]{ border-color: var(--teal); }
+
+/* ================================================================
+   PHOTO CARD
+   Circular photo frame + upload control on the right side of
+   the hero. Shows initials until a photo is uploaded via script.js.
+================================================================ */
+.photo-card{
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  gap: 16px;
+  padding: 26px;
+}
+.photo-frame{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--surface-2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.photo-frame img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.photo-caption{
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: #b0aedc;
+  text-align: center;
+}
+
+/* ================================================================
+   EXPANDABLE SECTIONS (PROJECTS & CERTIFICATES)
+   Collapsed by default (max-height: 0, invisible). script.js adds
+   the "open" class when the matching button is clicked, which
+   this rule then animates open. This is what keeps projects and
+   certificates OFF the page until the user asks to see them.
+================================================================ */
+.reveal-section{
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height .5s ease, opacity .4s ease, margin .4s ease;
+  margin: 0;
+}
+.reveal-section.open{
+  max-height: 3200px; /* tall enough to fit the content when opened */
+  opacity: 1;
+  margin: 0 0 48px;
+}
+section.block{ padding-top: 8px; }
+.section-heading-row{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  margin-bottom: 4px;
+}
+.section-heading-row h2{
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--muted);
+  margin:0;
+  font-weight:500;
+}
+
+/* Card grid shared by both the projects and certificates sections */
+.grid-cards{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.card{
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card h3{
+  font-family: var(--font-display);
+  font-size: 15px;
+  margin:0;
+}
+.card p{
+  font-size: 13.5px;
+  color: var(--muted);
+  margin:0;
+  flex-grow:1;
+}
+.tags{ display:flex; flex-wrap:wrap; gap:6px; }
+.tag{
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  color: var(--teal);
+  background: rgba(95,212,196,0.1);
+  border: 1px solid rgba(95,212,196,0.25);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.card-link{
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  color: var(--amber);
+  text-decoration:none;
+}
+.card-link:hover{ text-decoration:underline; }
+
+/* Dashed "add your own" placeholder tiles in projects/certificates */
+.card.placeholder{
+  border-style: dashed;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 13px;
+  min-height: 140px;
+}
+.card.placeholder .plus{
+  font-size: 22px;
+  color: var(--border);
+  margin-bottom: 6px;
+}
+
+/* Certificate cards are laid out horizontally (icon + text) */
+.cert-card{ flex-direction: row; align-items:center; gap: 14px; }
+.cert-icon{
+  width: 40px; height: 40px;
+  flex-shrink:0;
+  border-radius: 8px;
+  background: var(--amber-soft);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--amber);
+  font-family: var(--font-display);
+  font-weight:700;
+}
+.cert-meta{ font-size: 12px; color: var(--muted); }
+
+/* ================================================================
+   SECTION 4: CONTACT
+   Two-column layout: the message form on the left, direct
+   email/social links on the right. Always visible (not collapsed).
+================================================================ */
+#contact{ padding-bottom: 70px; }
+.contact-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.field{ margin-bottom: 14px; display:flex; flex-direction:column; gap:6px; }
+.field label{
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--muted);
+}
+.field input, .field textarea{
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  resize: vertical;
+}
+.field input:focus, .field textarea:focus{
+  border-color: var(--teal);
+  outline: none;
+}
+.direct-contact{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.direct-contact p{ color: var(--muted); font-size: 14px; }
+.social-row{ display:flex; gap:10px; margin-top: 14px; flex-wrap:wrap; }
+.social-pill{
+  font-family: var(--font-display);
+  font-size: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  text-decoration:none;
+  color: var(--muted);
+  transition: border-color .2s ease, color .2s ease;
+}
+.social-pill:hover{ border-color: var(--teal); color: var(--teal); }
+
+/* ================================================================
+   FOOTER
+================================================================ */
+footer{
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
+  text-align:center;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 12px;
+}
+
+/* ================================================================
+   RESPONSIVE / MOBILE LAYOUT
+   Below 800px: stack the hero into one column (photo card moves
+   above the text), stack the contact grid, and make the command
+   buttons full-width for easier tapping.
+================================================================ */
+@media (max-width: 800px){
+  .hero-grid{ grid-template-columns: 1fr; }
+  .photo-card{ order: -1; }
+  .contact-grid{ grid-template-columns: 1fr; }
+  .cmd-buttons{ flex-direction:column; align-items:stretch; }
+}
