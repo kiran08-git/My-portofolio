@@ -5,18 +5,18 @@
    it's used — this is the easiest place to re-theme the whole site.
 ================================================================ */
 :root{
-  --bg: #0a1120;           /* page background (deep navy) */
-  --surface: #101a30;      /* terminal window background */
-  --surface-2: #16213d;    /* title bars, buttons, cards */
-  --border: #253253;       /* hairline borders everywhere */
-  --amber: #e3a53d;        /* primary accent (terminal amber) */
-  --amber-soft: rgba(227,165,61,0.14);
-  --teal: #5fd4c4;         /* secondary accent (links, tags) */
-  --text: #e8ecf3;         /* main text color */
-  --muted: #8291ab;        /* secondary/muted text */
-  --dot-red: #ff5f56;      /* terminal traffic-light dots */
-  --dot-yellow: #ffbd2e;
-  --dot-green: #27c93f;
+  --bg: #f7f8fc;           /* page background (soft ivory) */
+  --surface: #ffffff;      /* terminal window background */
+  --surface-2: #f1f3f8;    /* title bars, buttons, cards */
+  --border: #d8dbe6;       /* hairline borders everywhere */
+  --amber: #b9751a;        /* primary accent (warm amber) */
+  --amber-soft: rgba(185,117,26,0.14);
+  --teal: #2a8f86;         /* secondary accent (links, tags) */
+  --text: #1f2937;         /* main text color */
+  --muted: #52606d;        /* secondary/muted text */
+  --dot-red: #d53f3f;      /* terminal traffic-light dots */
+  --dot-yellow: #d68f1d;
+  --dot-green: #2f8a4e;
 
   --font-display: 'JetBrains Mono', monospace; /* headings & UI labels */
   --font-body: 'Inter', sans-serif;            /* paragraph text */
